@@ -62,11 +62,12 @@ export default defineComponent({
 	methods: {
 		async do_login() {
 			const res = await userApi.login(this.form);
-			if (res.code === 0) {
+			if (res.success) {
 				// 缓存用户信息
-				const resInfo = res.request;
+				const resInfo = res.userInfo;
 				Object.assign(userInfo, resInfo);
-				Cookies.set('userName', resInfo.userName);
+        localStorage.setItem('jwtToken', res.token);
+        Cookies.set('userName', resInfo.username);
 				Cookies.set('userId', resInfo.userId);
 				Cookies.set('editMedia', resInfo.editMedia);
 				Cookies.set('editUser', resInfo.editUser);

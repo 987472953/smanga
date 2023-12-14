@@ -90,6 +90,21 @@ const ajax = Axios.create({
 	],
 });
 
+// 添加请求拦截器
+ajax.interceptors.request.use(config => {
+	// 从LocalStorage中获取JWT Token
+	const jwtToken = localStorage.getItem('jwtToken');
+
+	// 如果JWT Token存在，将其添加到请求头
+	if (jwtToken) {
+		config.headers.Authorization = `Bearer ${jwtToken}`;
+	}
+
+	return config;
+}, error => {
+	return Promise.reject(error);
+});
+
 /**
  * 生成密钥
  * 时间戳 + 密文,经过md5加密后形成
