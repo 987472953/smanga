@@ -6,11 +6,11 @@ import {ElMessage} from 'element-plus';
 import {Cookies} from '@/utils';
 import router from '@/router';
 
-const devUrl = '/php/public/index.php/';
-const prodUrl = process.env.VUE_APP_PATH || '/php/public/index.php/';
+const devUrl = '';
+const prodUrl = process.env.VUE_APP_PATH || '';
 
 // 接口路径的设置
-const url = process.env.NODE_ENV === 'development' ? '/cms' + devUrl : prodUrl;
+const url = process.env.NODE_ENV === 'development' ? '' + devUrl : prodUrl;
 
 /**
  * 创建默认接口请求设置
@@ -24,7 +24,7 @@ const ajax = Axios.create({
 	method: 'post',
 	params: {},
 	headers: {
-		'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+		'Content-Type': 'application/json',
 	},
 	transformRequest: [
 		(data) => {
@@ -41,7 +41,8 @@ const ajax = Axios.create({
 				keyword: get_key_word(timestamp),
 			});
 			// 返回json
-			return Qs.stringify(data);
+			// return Qs.stringify(data);
+			return JSON.stringify(data);
 		},
 	],
 	transformResponse: [
@@ -93,10 +94,11 @@ const ajax = Axios.create({
 // 添加请求拦截器
 ajax.interceptors.request.use(config => {
 	// 从LocalStorage中获取JWT Token
-	const jwtToken = localStorage.getItem('jwtToken');
+	const jwtToken = sessionStorage.getItem('jwtToken');
 
 	// 如果JWT Token存在，将其添加到请求头
-	if (jwtToken) {
+	if (jwtToken && jwtToken !== 'undefined') {
+		console.log("添加token" + jwtToken)
 		config.headers.Authorization = `Bearer ${jwtToken}`;
 	}
 

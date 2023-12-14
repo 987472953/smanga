@@ -62,18 +62,20 @@ export default defineComponent({
 	methods: {
 		async do_login() {
 			const res = await userApi.login(this.form);
+      console.log("res")
+      console.log(res)
 			if (res.success) {
 				// 缓存用户信息
-				const resInfo = res.userInfo;
+				const resInfo = res.data.userInfo;
 				Object.assign(userInfo, resInfo);
-        localStorage.setItem('jwtToken', res.token);
-        Cookies.set('userName', resInfo.username);
-				Cookies.set('userId', resInfo.userId);
-				Cookies.set('editMedia', resInfo.editMedia);
-				Cookies.set('editUser', resInfo.editUser);
-				power.editMedia = resInfo.editMedia == 1;
-				power.editUser = resInfo.editUser == 1;
-
+        // Cookies.set('userName', resInfo.username);
+				// Cookies.set('userId', resInfo.userId);
+				// Cookies.set('editMedia', resInfo.editMedia);
+				// Cookies.set('editUser', resInfo.editUser);
+				// power.editMedia = resInfo.editMedia == 1;
+				// power.editUser = resInfo.editUser == 1;
+        let token = res.data.token;
+        sessionStorage.setItem('jwtToken', token);
 				await this.$router.push('media-list');
 			}
 		},

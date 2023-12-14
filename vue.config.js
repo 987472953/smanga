@@ -40,12 +40,12 @@ module.exports = {
 		// host: '0.0.0.0',
 		proxy: {
 			//配置代理
-			'/cms': {
+			'/': {
 				target: target,
 				changeOrigin: true,
 				ws: true,
 				pathRewrite: {
-					'^/cms': '',
+					'^/': '',
 				},
 			},
 		},
