@@ -5,7 +5,7 @@
  * @LastEditTime: 2023-10-24 00:57:01
  * @FilePath: \smanga\src\api\path.ts
  */
-import {ajax} from './index';
+import {ajax, ajax_get} from './index';
 
 const pathApi = {
 	/**
@@ -15,9 +15,9 @@ const pathApi = {
 	 * @param pageSize
 	 */
 	async get_path(mediaId: number, page: number, pageSize: number) {
-		const res = ajax({
+		const res = ajax_get({
 			url: 'path/get',
-			data: {mediaId, page, pageSize},
+			params: {mediaId, page, pageSize},
 		});
 
 		return (await res).data;

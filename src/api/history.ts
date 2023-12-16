@@ -5,7 +5,7 @@
  * @LastEditTime: 2023-10-25 02:01:31
  * @FilePath: \smanga\src\api\history.ts
  */
-import {ajax} from './index';
+import {ajax, ajax_get} from './index';
 import {global_get} from '@/utils';
 
 /**
@@ -19,9 +19,9 @@ const historyApi = {
 	 * @return {*}
 	 */
 	async get_latest(mangaId: number) {
-		const res = await ajax({
+		const res = await ajax_get({
 			url: 'history/get_latest',
-			data: {mangaId},
+			params: {mangaId},
 		});
 
 		if (res.data.code == 1) {
@@ -62,9 +62,9 @@ const historyApi = {
 		page: number | undefined = undefined,
 		pageSize: number | undefined = undefined
 	) {
-		const res = ajax({
+		const res = ajax_get({
 			url: 'history/get',
-			data: {page, pageSize},
+			params: {page, pageSize},
         });
         
         return (await res).data;

@@ -5,7 +5,7 @@
  * @LastEditTime: 2023-08-25 15:08:56
  * @FilePath: \smanga\src\api\search.ts
  */
-import {ajax} from './index';
+import {ajax, ajax_get} from './index';
 
 export function search(
 	searchText: string,
@@ -14,9 +14,9 @@ export function search(
 	pageSize: number,
 	order = ''
 ) {
-	return ajax({
+	return ajax_get({
 		url: 'search/get',
-		data: {searchText, searchType, page, pageSize, order},
+		params: {searchText, searchType, page, pageSize, order},
 	});
 }
 
@@ -28,9 +28,9 @@ const searchApi = {
 		pageSize: number,
 		order = ''
 	) {
-		const res =  ajax({
+		const res =  ajax_get({
 			url: 'search/get',
-			data: {searchText, searchType, page, pageSize, order},
+			params: {searchText, searchType, page, pageSize, order},
 		});
 
 		return (await res).data;

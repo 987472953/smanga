@@ -1,4 +1,4 @@
-import {ajax} from './index';
+import {ajax, ajax_get} from './index';
 
 /**
  * @description: 上次阅读记录
@@ -11,9 +11,9 @@ const lastReadApi = {
 	 * @return {*}
 	 */
 	async get_latest(mangaId: number) {
-		const res = await ajax({
+		const res = await ajax_get({
 			url: 'lastread/get_latest',
-			data: {mangaId},
+			params: {mangaId},
 		});
 
 		if (res.data.code == 1) {
@@ -44,9 +44,9 @@ const lastReadApi = {
 	 * @return {*}
 	 */
 	async get(page = 1, pageSize = 10) {
-		const res = ajax({
+		const res = ajax_get({
 			url: 'lastread/get',
-			data: {page, pageSize},
+			params: {page, pageSize},
 		});
 
 		return (await res).data.list;

@@ -62,8 +62,6 @@ export default defineComponent({
 	methods: {
 		async do_login() {
 			const res = await userApi.login(this.form);
-      console.log("res")
-      console.log(res)
 			if (res.success) {
 				// 缓存用户信息
 				const resInfo = res.data.userInfo;
@@ -76,6 +74,7 @@ export default defineComponent({
 				// power.editUser = resInfo.editUser == 1;
         let token = res.data.token;
         sessionStorage.setItem('jwtToken', token);
+        console.log("session jwt: " + sessionStorage.getItem('jwtToken'));
 				await this.$router.push('media-list');
 			}
 		},

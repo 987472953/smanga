@@ -5,7 +5,7 @@
  * @LastEditTime: 2023-10-24 21:24:36
  * @FilePath: /smanga/src/api/serve-setting.ts
  */
-import {ajax} from './index';
+import {ajax, ajax_get} from './index';
 
 /**
  * @description: 服务器设置
@@ -18,7 +18,7 @@ const serveSettingApi = {
 	 * @return {*}
 	 */
 	async get() {
-		const res = ajax({
+		const res = ajax_get({
 			url: 'serve/get',
 		});
 

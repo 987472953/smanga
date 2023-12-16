@@ -6,7 +6,7 @@
  * @FilePath: \smanga\src\api\chapter.ts
  */
 import {userConfig} from '@/store';
-import {ajax} from './index';
+import {ajax, ajax_get} from './index';
 import {global_get} from '@/utils';
 
 interface chapterGetRes extends ResType {
@@ -24,7 +24,7 @@ const chapterApi = {
 	) {
 		const res = await ajax({
 			url: 'chapter/get',
-			data: {mangaId, page, pageSize, order, keyWord},
+			params: {mangaId, page, pageSize, order, keyWord},
 		});
 		const resData: chapterGetRes = res.data;
 
@@ -51,9 +51,9 @@ const chapterApi = {
 	 * @return {*}
 	 */
 	async get_first(mangaId: number, order: string) {
-		const res = await ajax({
+		const res = await ajax_get({
 			url: 'chapter/get_first',
-			data: {mangaId, order},
+			params: {mangaId, order},
 		});
 
 		return res.data;

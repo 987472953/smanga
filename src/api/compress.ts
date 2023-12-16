@@ -5,7 +5,7 @@
  * @LastEditTime: 2023-10-25 01:05:55
  * @FilePath: \smanga\src\api\compress.ts
  */
-import {ajax} from './index';
+import {ajax, ajax_get} from './index';
 
 const compressApi = {
 	/**
@@ -14,9 +14,9 @@ const compressApi = {
 	 * @param pageSize
 	 */
 	async get_compress(page: number, pageSize: number) {
-		const res = ajax({
+		const res = ajax_get({
 			url: 'compress/get',
-			data: {page, pageSize},
+			params: {page, pageSize},
 		});
 
 		return (await res).data;

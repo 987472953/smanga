@@ -5,7 +5,7 @@
  * @LastEditTime: 2023-10-26 20:27:28
  * @FilePath: /smanga/src/api/manga.ts
  */
-import {ajax} from './index';
+import {ajax, ajax_get} from './index';
 
 const mangaApi = {
     /**
@@ -23,9 +23,9 @@ const mangaApi = {
         order = '',
         keyWord = ''
     ) {
-        const res = ajax({
+        const res = ajax_get({
             url: 'manga/get',
-            data: {mediaId, page, pageSize, order, keyWord},
+            params: {mediaId, page, pageSize, order, keyWord},
         });
 
         return (await res).data;
@@ -41,9 +41,9 @@ const mangaApi = {
         pageSize: number,
         order = ''
     ) {
-        const res = ajax({
+        const res = ajax_get({
             url: 'manga/get_by_tags',
-            data: {tagIds, page, pageSize, order},
+            params: {tagIds, page, pageSize, order},
         });
 
         const data: ResType = (await res).data;
@@ -60,9 +60,9 @@ const mangaApi = {
      * @return {*}
      */
     async get_manga_info(mangaId: number) {
-        const res = ajax({
+        const res = ajax_get({
             url: 'manga/get_manga_info',
-            data: {mangaId},
+            params: {mangaId},
         });
 
         const data = (await res).data;

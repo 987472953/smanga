@@ -5,7 +5,7 @@
  * @LastEditTime: 2023-10-25 00:48:36
  * @FilePath: \smanga\src\api\tag.ts
  */
-import {ajax} from './index';
+import {ajax, ajax_get} from './index';
 
 type tagParams = {
 	tagId?: number;
@@ -34,9 +34,9 @@ const tagApi = {
 		page: number | undefined = undefined,
 		pageSize: number | undefined = undefined
 	) {
-		const res = ajax({
+		const res = ajax_get({
 			url: 'tag/get',
-			data: {page, pageSize},
+			params: {page, pageSize},
 		});
 
 		const resData: ResType = (await res).data;
@@ -52,9 +52,9 @@ const tagApi = {
 	 * @return {*}
 	 */
 	get_nopage: async function () {
-		const res = ajax({
+		const res = ajax_get({
 			url: 'tag/get',
-			data: {nopage: true},
+			params: {nopage: true},
 		});
 
 		const resData: ResType = (await res).data;
@@ -82,9 +82,9 @@ const tagApi = {
 	 * @return {*}
 	 */
 	get_manga_tag: async function (mangaId: number) {
-		const res = ajax({
+		const res = ajax_get({
 			url: 'tag/manga-tag/get',
-			data: {
+			params: {
 				nopage: true,
 				mangaId,
 			},
