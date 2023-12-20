@@ -1,4 +1,4 @@
-import Axios from 'axios';
+import Axios, {InternalAxiosRequestConfig} from 'axios';
 import Qs from 'qs';
 import store from '../store';
 import {Md5} from 'ts-md5/dist/md5';
@@ -71,7 +71,6 @@ ajax_get.interceptors.request.use(addJwtTokenToRequest, error => {
     return Promise.reject(error);
 });
 
-
 function transformResponseData(data: any) {
     data = data || {};
 
@@ -108,7 +107,7 @@ function transformResponseData(data: any) {
     return data;
 }
 
-function addJwtTokenToRequest(config) {
+function addJwtTokenToRequest(config: InternalAxiosRequestConfig) {
     // 从 Session Storage 中获取 JWT Token
     const jwtToken = sessionStorage.getItem('jwtToken');
 
