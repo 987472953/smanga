@@ -111,7 +111,7 @@ export default defineComponent({
           }).then(async () => {
         const res = await compressApi.delete_compress(val.compressId);
 
-        if (res.code === 0) {
+        if (res.success) {
           this.reload_table();
         }
       }).catch(() => {

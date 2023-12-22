@@ -91,7 +91,7 @@ export default defineComponent({
 				.then(async () => {
 					const res = await userApi.delete_account(val.userId);
 
-					if (res.code === 0) {
+					if (res.success) {
 						// 进入子组件调用刷新
 						(this.$refs as any).pager.reload_page();
 					}
@@ -127,7 +127,7 @@ export default defineComponent({
 				Object.assign(this.form, {targetUserId}, {mediaLimit: limits})
 			);
 
-			if (res.code === 0) {
+			if (res.success) {
 				// 进入子组件调用刷新
 				(this.$refs as any).pager.reload_page();
 				this.dialogFormVisible = false;
@@ -166,7 +166,7 @@ export default defineComponent({
 			}
 			const res = await userApi.register(data);
 
-			if (res.code === 0) {
+			if (res.success) {
 				this.add_dialog_close();
 				this.load_table();
 			}

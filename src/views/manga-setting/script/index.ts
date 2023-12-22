@@ -111,7 +111,7 @@ export default defineComponent({
 
 			const res = await mangaApi.update_manga(this.form);
 
-			if (res.code === 0) {
+			if (res.success) {
 				this.editMangaDialog = false;
 				this.reload_table();
 			}
@@ -131,7 +131,7 @@ export default defineComponent({
 				.then(async () => {
 					const res = await mangaApi.delete_manga(row.mangaId);
 
-					if (res.code === 0) {
+					if (res.success) {
 						this.reload_table();
 					}
 				})

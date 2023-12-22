@@ -165,7 +165,7 @@ async function do_update_chapter() {
   }
 
   const res = await chapterApi.update_chapter(form);
-  if (res.code === 0) {
+  if (res.success) {
     editChapterDialog.value = false;
     reload_table();
   }
@@ -182,7 +182,7 @@ async function do_delete_chapter(index: number, row: any) {
   }).then(async () => {
     const res = await chapterApi.delete_chapter(row.chapterId);
 
-    if (res.code === 0) {
+    if (res.success) {
       reload_table();
     }
   }).catch(() => {

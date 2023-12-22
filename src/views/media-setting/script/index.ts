@@ -142,7 +142,7 @@ export default defineComponent({
 			}
 
 			const res = await mediaApi.add_media(this.form);
-			if (res.code === 0) {
+			if (res.success) {
 				this.dialog_close();
 				this.reload_table();
 			}
@@ -175,7 +175,7 @@ export default defineComponent({
 
 			const res = await mediaApi.update_media(this.form);
 
-			if (res.code === 0) {
+			if (res.success) {
 				this.editMediaDialog = false;
 				this.reload_table();
 			}
@@ -191,7 +191,7 @@ export default defineComponent({
 				.then(async () => {
 					const res = await mediaApi.delete_media(row.mediaId);
 
-					if (res.code === 0) {
+					if (res.success) {
 						this.reload_table();
 					}
 				})
@@ -207,7 +207,7 @@ export default defineComponent({
 				.then(async () => {
 					const res = await mediaApi.delete_path(pathInfo.pathId);
 
-					if (res.code === 0) {
+					if (res.success) {
 						this.load_path(pathInfo.mediaId);
 					}
 				})
@@ -228,7 +228,7 @@ export default defineComponent({
 						pathInfo.pathId
 					);
 
-					if (res.code === 0) {
+					if (res.success) {
 						this.load_path(pathInfo.mediaId);
 					}
 				})
@@ -241,7 +241,7 @@ export default defineComponent({
 				pathInfo.pathId
 			);
 
-			if (res.code === 0) {
+			if (res.success) {
 				this.load_path(pathInfo.mediaId);
 			}
 		},
@@ -255,7 +255,7 @@ export default defineComponent({
 
 			const res = await pathApi.add_path(mediaId, this.pathForm);
 
-			if (res.code === 0) {
+			if (res.success) {
 				// 重置表单
 				Object.assign(this.pathForm, {
 					path: '',
@@ -264,6 +264,11 @@ export default defineComponent({
 					exclude: '',
 				});
 				this.load_path(mediaId);
+			} else {
+				ElMessage({
+					message: res.message,
+					type: 'error',
+				});
 			}
 		},
 	},

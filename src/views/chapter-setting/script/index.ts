@@ -103,7 +103,7 @@ export default defineComponent({
             }
 
             const res = await chapterApi.update_chapter(this.form);
-            if (res.code === 0) {
+            if (res.success) {
                 this.editChapterDialog = false;
                 this.reload_table();
             }
@@ -120,7 +120,7 @@ export default defineComponent({
             }).then(async () => {
                 const res = await chapterApi.delete_chapter(row.chapterId);
 
-                if (res.code === 0) {
+                if (res.success) {
                     this.reload_table();
                 }
             }).catch(() => {

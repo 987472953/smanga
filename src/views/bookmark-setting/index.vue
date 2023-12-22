@@ -85,7 +85,7 @@ export default defineComponent({
         type: 'warning'
       }).then(async () => {
         const res = await bookmarkApi.delete_bookmark(val.bookmarkId);
-        if (res.code === 0) {
+        if (res.success) {
           this.reload_table();
         }
       })
