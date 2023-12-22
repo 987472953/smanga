@@ -117,8 +117,8 @@ export default defineComponent({
 		 */
 		async load_table(page = 1, pageSize = 10) {
 			const res = await mediaApi.get(page, pageSize);
-			this.count = Number(res.count);
-			this.tableData = res.list;
+			this.count = Number(res.total);
+			this.tableData = res.records;
 		},
 		/**
 		 * 重载数据 页码不变

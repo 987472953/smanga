@@ -30,7 +30,7 @@ const mediaList = ref<mediaType[]>([]);
  */
 async function load_media() {
 	const res = await mediaApi.get(1, 10000);
-	mediaList.value = res.list;
+	mediaList.value = res.records;
 }
 
 /**

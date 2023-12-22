@@ -186,7 +186,7 @@ export default defineComponent({
 	// 生命周期
 	async created() {
 		const res = await mediaApi.get(1, 10000);
-		const medias = res.list;
+		const medias = res.records;
 		this.medias = medias;
 		this.load_table();
 	},

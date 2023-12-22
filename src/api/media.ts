@@ -21,9 +21,7 @@ const mediaApi = {
             params: {page, pageSize},
         });
 
-        const resData = (await res).data;
-
-        return resData;
+        return (await res).data.data
     },
     /**
      * @description: 更新媒体库信息
