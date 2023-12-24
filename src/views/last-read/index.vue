@@ -9,7 +9,7 @@
     <div class="manga-list">
         <div class="title">继续阅读</div>
         <div :class="['manga-list-box', { block: config.viewType === 'list' }]">
-            <manga v-for="item in lastReadList" :key="item.lastReadId" :viewType="config.viewType" :mangaInfo="item" />
+            <manga v-for="item in lastReadList" :key="item.id" :viewType="config.viewType" :mangaInfo="item" />
         </div>
     </div>
 </template>

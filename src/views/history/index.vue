@@ -138,7 +138,6 @@ async function page_change(pageParams = 1, pageSize = defaultPageSize) {
   list.value = [];
 
   const res = await historyApi.get_history(pageParams, pageSize);
-
   list.value = res.records;
   count.value = res.total;
 

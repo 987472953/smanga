@@ -185,7 +185,9 @@ async function get_latest_reading() {
     const mangaId = mangaInfo.mangaId;
     if (!mangaId) return;
 
-    latestChapterInfo.value = await lastReadApi.get_latest(mangaId);
+  let value = await lastReadApi.get_latest(mangaId);
+  value.id  = value.chapterId;
+  latestChapterInfo.value = value;
 }
 
 /**
@@ -193,14 +195,15 @@ async function get_latest_reading() {
  * @return {*}
  */
 async function go_chapter() {
+  console.log('latestChapterInfo', latestChapterInfo)
     const chapterInfo = latestChapterInfo.value ? latestChapterInfo.value : firstChapterInfo.value;
 
     const res = await chapterApi.get(chapterInfo.mangaId);
     global_set_json('chapterList', res.list);
-    console.log("go_chapter")
+    console.log("go_chapter", res.list)
 
     // 缓存章节信息
-    global_set('chapterId', chapterInfo.chapterId);
+    global_set('chapterId', chapterInfo.id);
     global_set('chapterName', chapterInfo.chapterName);
     global_set('chapterPath', chapterInfo.chapterPath);
     global_set('chapterType', chapterInfo.chapterType);
@@ -208,10 +211,11 @@ async function go_chapter() {
 
     let page = chapterInfo.page || 1;
 
+  console.log('chapterInfo id', chapterInfo.id)
     router.push({
         name: chapterInfo.browseType,
         query: {
-            chapterId: chapterInfo.chapterId
+            chapterId: chapterInfo.id
         },
         params: { page },
     });
@@ -240,6 +244,7 @@ function go_chapter_list() {
  */
 async function render_meta() {
     const route = useRoute();
+  console.log('route', route.query)
     const mangaId = Number(route.query.mangaId);
     const res = await mangaApi.get_manga_info(mangaId);
     let bannerSoft: metaItemType[] = [];
@@ -255,25 +260,25 @@ async function render_meta() {
         item.blob = blob;
     })
 
-    if (res.meta.length > 0) {
-        // banner图
-        for (let i = 0; i < res.meta.length; i++) {
-            const metaItem = res.meta[i];
-            if (metaItem.metaType === 'banner') {
-                metaItem.blob = await imageApi.get(metaItem.metaFile);
-                bannerSoft.push(metaItem);
-            }
-        }
-    }
-
-    // 漫画封面
-    mangaCover.value = await imageApi.get(res.info.mangaCover);
-
-    // 将图片进行排序
-    bannerSoft.sort((a: any, b: any) => { return a.metaFile - b.metaFile });
-
-    // 将处理好的结果赋值给ref对象 (将计算过程整合 避免多次渲染)
-    banner.value = bannerSoft;
+    // if (res.meta.length > 0) {
+    //     // banner图
+    //     for (let i = 0; i < res.meta.length; i++) {
+    //         const metaItem = res.meta[i];
+    //         if (metaItem.metaType === 'banner') {
+    //             metaItem.blob = await imageApi.get(metaItem.metaFile);
+    //             bannerSoft.push(metaItem);
+    //         }
+    //     }
+    // }
+    //
+    // // 漫画封面
+    // mangaCover.value = await imageApi.get(res.info.mangaCover);
+    //
+    // // 将图片进行排序
+    // bannerSoft.sort((a: any, b: any) => { return a.metaFile - b.metaFile });
+    //
+    // // 将处理好的结果赋值给ref对象 (将计算过程整合 避免多次渲染)
+    // banner.value = bannerSoft;
 }
 
 /**

@@ -67,7 +67,7 @@ const historyApi = {
 			params: {page, pageSize},
         });
 
-        return (await res).data;
+        return (await res).data.data;
 	},
 
 	/**

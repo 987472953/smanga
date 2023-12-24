@@ -6,7 +6,7 @@
  * @FilePath: /smanga/src/type/last-read.ts
  */
 type lastReadType = {
-	lastReadId: number;
+	id: number;
 	page: string;
 	chapterId: string;
 	mangaId: number;

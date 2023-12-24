@@ -18,9 +18,9 @@ const lastReadApi = {
 
 		if (!res.data.success) {
 			return false;
-		} else {
-			return res.data.data;
 		}
+
+		return res.data.data;
 	},
 
 	/**
@@ -49,7 +49,9 @@ const lastReadApi = {
 			params: {page, pageSize},
 		});
 
-		return (await res).data.data.records;
+		const data: ResType = (await res).data;
+		console.log(data)
+		return data.data.records;
 	},
 };
 
