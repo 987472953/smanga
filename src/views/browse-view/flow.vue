@@ -11,7 +11,7 @@
 		<chapter-list-menu @before="before" @next="next" @changeChapter="change_chapter" />
 
 		<!-- 书签 -->
-		<bookmark :page="currentPage" :chapterId="chapterInfo.chapterId" />
+		<bookmark :page="currentPage" :chapterId="chapterInfo.id" />
 
 		<!-- 下拉刷新 -->
 		<van-pull-refresh v-model="loading" @refresh="before_page">
@@ -104,7 +104,7 @@ const index = computed<number>(() => {
 
 // 章节详情
 let chapterInfo = reactive<chapterInfoType>({
-	chapterId: 0,
+	id: 0,
 	chapterPath: '',
 	chapterType: 'img',
 	browseType: '',
@@ -128,7 +128,7 @@ let beforeBookMark = 0;
 watch(
 	() => currentPage.value,
 	() => {
-		lastReadApi.add(currentPage.value, chapterInfo.chapterId, chapterInfo.mangaId, finished.value);
+		lastReadApi.add(currentPage.value, chapterInfo.id, chapterInfo.mangaId, finished.value);
 	}
 )
 
@@ -188,7 +188,7 @@ async function load_image(index: number, errNum = 0, unshift = false) {
 	// 重新请教超过三次 取消此图片加载
 	if (errNum > 3) return false;
 
-	const [res, err] = await imageApi.chapter_img(imgPathList.value[index], index + 1, chapterInfo.chapterId, chapterInfo.mangaId).then(res => [res, null]).catch(err => [null, err]);
+	const [res, err] = await imageApi.chapter_img(imgPathList.value[index], index + 1, chapterInfo.id, chapterInfo.mangaId).then(res => [res, null]).catch(err => [null, err]);
 
 	// 错误处理
 	if (err) {
@@ -215,15 +215,17 @@ async function load_image(index: number, errNum = 0, unshift = false) {
  */
 async function reload_page(addHistory = true, clearPage = true, pageParams = 1) {
 	// 初始化chapterInfo
-	if (!chapterInfo.chapterId) {
+  console.log(chapterInfo)
+  console.log(chapterInfo.id)
+	if (!chapterInfo.id) {
 		const chapterId = Number(route.query.chapterId);
 
 		// 获取章节信息
-		chapterInfo = chapterList.value.filter((item: chapterInfoType) => item.chapterId == chapterId)[0]
-
+		chapterInfo = chapterList.value.filter((item: chapterInfoType) => item.id == chapterId)[0]
 		// 更新阅读记录
 		lastReadApi.add(currentPage.value, chapterInfo.chapterId, chapterInfo.mangaId);
 	}
+  console.log("sfsgs", chapterInfo)
 
 	// 重置图片数据
 	if (clearPage) {
@@ -240,7 +242,7 @@ async function reload_page(addHistory = true, clearPage = true, pageParams = 1) 
 		historyApi.add_history();
 	}
 
-	const res = await chapterApi.get_images(chapterInfo.chapterId);
+	const res = await chapterApi.get_images(chapterInfo.id);
 
 	switch (res.state) {
 		case 'uncompressed':
@@ -291,7 +293,7 @@ async function before() {
 
 	await router.push({
 		name: route.name as string,
-		query: Object.assign({}, route.query, { chapterId: chapterInfo.chapterId, }),
+		query: Object.assign({}, route.query, { chapterId: chapterInfo.id, }),
 		params: { page: 1 },
 	});
 
@@ -318,7 +320,7 @@ async function next() {
 
 	await router.push({
 		name: route.name as string,
-		query: Object.assign({}, route.query, { chapterId: chapterInfo.chapterId, }),
+		query: Object.assign({}, route.query, { chapterId: chapterInfo.id, }),
 		params: { page: 1 },
 	});
 
@@ -336,7 +338,7 @@ async function change_chapter(index: number) {
 	await router.push({
 		name: route.name as string,
 		query: Object.assign({}, route.query, {
-			chapterId: chapterInfo.chapterId,
+			chapterId: chapterInfo.id,
 		}),
 	});
 
@@ -347,8 +349,8 @@ async function change_chapter(index: number) {
 }
 
 function update_chapter_info() {
-	if (!chapterInfo.chapterId) return;
-	global_set('chapterId', chapterInfo.chapterId);
+	if (!chapterInfo.id) return;
+	global_set('chapterId', chapterInfo.id);
 	global_set('chapterName', chapterInfo.chapterName);
 	global_set('chapterPath', chapterInfo.chapterPath);
 	global_set('chapterCover', chapterInfo.chapterCover);

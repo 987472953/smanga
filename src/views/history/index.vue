@@ -62,7 +62,7 @@ let loading = ref(false);
 const chapterInfo = ref<chapterInfoType>({
   browseType: '',
   chapterCover: '',
-  chapterId: 0,
+  id: 0,
   chapterName: '',
   chapterPath: '',
   chapterType: '',
@@ -139,8 +139,8 @@ async function page_change(pageParams = 1, pageSize = defaultPageSize) {
 
   const res = await historyApi.get_history(pageParams, pageSize);
 
-  list.value = res.list;
-  count.value = res.count;
+  list.value = res.records;
+  count.value = res.total;
 
   // 结束加载
   loading.value = false;

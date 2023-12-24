@@ -270,6 +270,7 @@ async function go_browse(item: any) {
 	// 加载章节列表
 	const res = await chapterApi.get(item.mangaId);
 	global_set_json('chapterList', res.list);
+  console.log(res.list)
 
 	let page = 1;
 

@@ -1,6 +1,4 @@
 import Axios, {InternalAxiosRequestConfig} from 'axios';
-import Qs from 'qs';
-import store from '../store';
 import {Md5} from 'ts-md5/dist/md5';
 import {ElMessage} from 'element-plus';
 import {Cookies} from '@/utils';
@@ -113,7 +111,6 @@ function addJwtTokenToRequest(config: InternalAxiosRequestConfig) {
 
     // 如果 JWT Token 存在，将其添加到请求头
     if (jwtToken && jwtToken !== 'undefined') {
-        console.log("添加token" + jwtToken)
         config.headers.Authorization = `Bearer ${jwtToken}`;
     }
 
@@ -162,4 +159,4 @@ function array_sort_name(arr: any[]) {
     });
 }
 
-export {ajax, ajax_get, url, array_sort, array_sort_name};
+export {ajax, ajax_get, url, addJwtTokenToRequest, array_sort, array_sort_name};

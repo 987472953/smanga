@@ -6,12 +6,8 @@
  * @FilePath: \smanga\src\type\api.ts
  */
 interface ResType {
+	success: boolean;
 	code: number;
-	data: any;
-	list: [];
-	count: number;
 	message: string;
-	status: string;
-	eMsg: string;
-	request: string;
+	data: any;
 }

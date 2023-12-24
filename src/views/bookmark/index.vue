@@ -63,7 +63,7 @@ const menuPoster = ref('');
 const chapterInfo = ref<chapterInfoType>({
   browseType: '',
   chapterCover: '',
-  chapterId: 0,
+  id: 0,
   chapterName: '',
   chapterPath: '',
   chapterType: '',
@@ -97,7 +97,6 @@ async function go_browse(item: any) {
 
   const chapterListRes = await chapterApi.get(mangaId);
   const chapterList = chapterListRes.list;
-
   // 缓存章节信息
   global_set('mangaId', mangaId);
   global_set('mangaCover', mangaCover);

@@ -16,10 +16,10 @@ const lastReadApi = {
 			params: {mangaId},
 		});
 
-		if (res.data.code == 1) {
+		if (!res.data.success) {
 			return false;
 		} else {
-			return res.data.request;
+			return res.data.data;
 		}
 	},
 
@@ -49,7 +49,7 @@ const lastReadApi = {
 			params: {page, pageSize},
 		});
 
-		return (await res).data.list;
+		return (await res).data.data.records;
 	},
 };
 

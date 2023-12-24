@@ -103,7 +103,7 @@ let mangaInfo = reactive<mangaInfoType>({
 let firstChapterInfo = ref<chapterInfoType>({
     browseType: '',
     chapterCover: '',
-    chapterId: 0,
+    id: 0,
     chapterName: '',
     chapterPath: '',
     chapterType: '',
@@ -174,7 +174,7 @@ async function get_first_chapter() {
     if (!mangaId) return;
 
     const infoRes = await chapterApi.get_first(mangaId, userConfig.order);
-    firstChapterInfo.value = infoRes.request;
+    firstChapterInfo.value = infoRes.data;
 }
 
 /**
@@ -197,6 +197,7 @@ async function go_chapter() {
 
     const res = await chapterApi.get(chapterInfo.mangaId);
     global_set_json('chapterList', res.list);
+    console.log("go_chapter")
 
     // 缓存章节信息
     global_set('chapterId', chapterInfo.chapterId);
@@ -242,10 +243,9 @@ async function render_meta() {
     const mangaId = Number(route.query.mangaId);
     const res = await mangaApi.get_manga_info(mangaId);
     let bannerSoft: metaItemType[] = [];
-    
     mangaInfo = res.info;
+    title.value = mangaInfo.mangaName;
     tags.value = res.tags;
-    title.value = res.info.mangaName;
 
     // 角色信息
     character.value = res.character;

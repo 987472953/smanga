@@ -42,8 +42,8 @@ const tagApi = {
 		const resData: ResType = (await res).data;
 
 		return {
-			list: resData.list,
-			count: resData.count,
+			list: resData.data.records,
+			count: resData.data.total,
 		};
 	},
 
@@ -54,12 +54,12 @@ const tagApi = {
 	get_nopage: async function () {
 		const res = ajax_get({
 			url: 'tag/get',
-			params: {nopage: true},
+			params: {noPage: true},
 		});
 
 		const resData: ResType = (await res).data;
 
-		return resData.list;
+		return resData.data.records;
 	},
 
 	/**
@@ -92,7 +92,7 @@ const tagApi = {
 
 		const resData: ResType = (await res).data;
 
-		return resData.list;
+		return resData.data.records;
 	},
 
 	/**

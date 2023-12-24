@@ -6,7 +6,7 @@
       <div class="top-seat" v-if="config.android"></div>
       <el-menu class="chapter-list" active-text-color="#ee0a24" :default-active="String(chapterIndex)"
         @select="change_chapter">
-        <el-menu-item v-for="(k, i) in chapterList" :index="String(i)" :key="k.chapterId">{{ k.chapterName }}
+        <el-menu-item v-for="(k, i) in chapterList" :index="String(i)" :key="k.id">{{ k.chapterName }}
         </el-menu-item>
         <seat height="4rem" />
       </el-menu>
@@ -46,7 +46,7 @@ let chapterIndex = computed(() => {
   const chapterId = Number(route.query.chapterId);
 
   for (let i = 0; i < chapterList.value.length; i++) {
-    if (chapterId === chapterList.value[i].chapterId) {
+    if (chapterId === chapterList.value[i].id) {
       //缓存章节坐标
       global_set('chapterIndex', i);
       return i;

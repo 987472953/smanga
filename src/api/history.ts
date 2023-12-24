@@ -27,7 +27,7 @@ const historyApi = {
 		if (res.data.code == 1) {
 			return false;
 		} else {
-			return res.data.info;
+			return res.data.data;
 		}
 	},
 
@@ -50,7 +50,7 @@ const historyApi = {
 				chapterCover: global_get('chapterCover'),
 			},
         });
-        
+
         return (await res).data;
 	},
 
@@ -66,7 +66,7 @@ const historyApi = {
 			url: 'history/get',
 			params: {page, pageSize},
         });
-        
+
         return (await res).data;
 	},
 
@@ -82,7 +82,7 @@ const historyApi = {
 				historyId,
 			},
         });
-        
+
         return (await res).data;
 	},
 };

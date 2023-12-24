@@ -8,7 +8,7 @@
 type chapterInfoType = {
 	browseType: string;
 	chapterCover: string;
-	chapterId: number;
+	id: number;
 	chapterName: string;
 	chapterPath: string;
 	chapterType: string;

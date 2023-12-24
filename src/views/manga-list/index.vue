@@ -9,7 +9,7 @@
 			<template v-else>
 				<div :class="['manga-list-box', { block: config.viewType === 'list' }]">
 					<manga v-for="(i, k) in list" :key="i.mangaId" :viewType="config.viewType" :mangaInfo="i"
-						@contextmenu.prevent="context_menu(i, k)" />
+                 @contextmenu.prevent="context_menu(i, k)" />
 				</div>
 			</template>
 		</div>
@@ -177,8 +177,8 @@ async function page_change(
 	list.value = [];
 
 	const res = await mangaApi.get(mediaId.value, page.value, pageSize, userConfig.order);
-	list.value = res.list;
-	count.value = res.count;
+	list.value = res.records;
+	count.value = res.total;
 
 	// 结束加载
 	loading.value = false;

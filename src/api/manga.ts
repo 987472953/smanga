@@ -28,7 +28,7 @@ const mangaApi = {
             params: {mediaId, page, pageSize, order, keyWord},
         });
 
-        return (await res).data;
+        return (await res).data.data;
     },
 
     /**
@@ -49,8 +49,8 @@ const mangaApi = {
         const data: ResType = (await res).data;
 
         return {
-            list: data.list,
-            count: data.count,
+            list: data.data.records,
+            count: data.data.count,
         };
     },
 
@@ -67,7 +67,7 @@ const mangaApi = {
 
         const data = (await res).data;
 
-        return data.request;
+        return data.data;
     },
 
     /**

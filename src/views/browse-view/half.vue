@@ -8,7 +8,7 @@
 
     <!--图片容器-->
     <div class="single-page-img-box touch-dom">
-      <bookmark :page="page" :chapterId="chapterInfo.chapterId" />
+      <bookmark :page="page" :chapterId="chapterInfo.id" />
       <img class="single-page-img" :src="imgSrc" :alt="t('browse.imgLoadError')" @click.stop="switch_menu" />
 
       <operation-cover @before="beforePage" @next="nextPage" @switch-menu="switch_menu"
@@ -69,7 +69,7 @@ const index = computed<number>(() => {
   const chapterId = Number(route.query.chapterId);
 
   for (let i = 0; i < list.length; i++) {
-    if (chapterId === list[i].chapterId) {
+    if (chapterId === list[i].id) {
       //缓存章节坐标
       global_set('chapterIndex', i);
       return i;
@@ -80,7 +80,7 @@ const index = computed<number>(() => {
 })
 
 let chapterInfo = reactive<chapterInfoType>({
-  chapterId: 0,
+  id: 0,
   chapterPath: '',
   chapterType: 'img',
   browseType: '',
@@ -104,7 +104,7 @@ const pager = ref();
 watch(
   () => page.value,
   () => {
-    lastReadApi.add(page.value, chapterInfo.chapterId, chapterInfo.mangaId, page.value >= count.value);
+    lastReadApi.add(page.value, chapterInfo.id, chapterInfo.mangaId, page.value >= count.value);
   }
 )
 
@@ -115,7 +115,7 @@ watch(
 async function page_change(pageParams: number) {
   // 清空之前图片内容
   imgPathFiles.value = [];
-  
+
   page.value = pageParams;
   const even = pageParams % 2 === 0;
 
@@ -183,19 +183,19 @@ function nextPage() {
  */
 async function reload_page(page = 1, addHistory = true) {
   // 初始化chapterInfo
-  if (!chapterInfo.chapterId) {
+  if (!chapterInfo.id) {
     const chapterId = Number(route.query.chapterId);
 
     // 获取章节信息
-    chapterInfo = chapterList.value.filter((item: chapterInfoType) => item.chapterId == chapterId)[0]
+    chapterInfo = chapterList.value.filter((item: chapterInfoType) => item.id == chapterId)[0]
 
     // 更新阅读记录
-    lastReadApi.add(page, chapterInfo.chapterId, chapterInfo.mangaId);
+    lastReadApi.add(page, chapterInfo.id, chapterInfo.mangaId);
   }
 
   if (addHistory) historyApi.add_history();
   // 加载图片列表
-  const res = await chapterApi.get_images(chapterInfo.chapterId);
+  const res = await chapterApi.get_images(chapterInfo.id);
 
   switch (res.state) {
     case 'uncompressed':
@@ -237,7 +237,7 @@ async function before() {
   await router.push({
     name: route.name as string,
     query: {
-      chapterId: chapterInfo.chapterId,
+      chapterId: chapterInfo.id,
     },
     params: { page: 1 },
   });
@@ -266,7 +266,7 @@ async function next() {
   await router.push({
     name: route.name as string,
     query: {
-      chapterId: chapterInfo.chapterId,
+      chapterId: chapterInfo.id,
     },
     params: { page: 1 },
   });
@@ -287,7 +287,7 @@ async function change_chapter(index: any) {
   await router.push({
     name: route.name as string,
     query: {
-      chapterId: chapterInfo.chapterId,
+      chapterId: chapterInfo.id,
     },
     params: { page: 1 },
   });
@@ -302,7 +302,7 @@ async function change_chapter(index: any) {
  * 更新阅读缓存
  */
 function update_chapter_info() {
-  global_set('chapterId', chapterInfo.chapterId);
+  global_set('chapterId', chapterInfo.id);
   global_set('chapterName', chapterInfo.chapterName);
   global_set('chapterPath', chapterInfo.chapterPath);
   global_set('chapterCover', chapterInfo.chapterCover);
