@@ -60,12 +60,10 @@ const mediaApi = {
      */
     async delete_media(mediaId: any) {
         const res = ajax({
-            url: 'media/delete',
-            data: {mediaId},
+            url: 'media/delete/' + mediaId
         });
 
-        const resData = (await res).data;
-        return resData;
+        return (await res).data;
     },
 
     /**

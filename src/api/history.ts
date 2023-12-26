@@ -24,7 +24,7 @@ const historyApi = {
 			params: {mangaId},
 		});
 
-		if (res.data.code == 1) {
+		if (!res.data.success) {
 			return false;
 		} else {
 			return res.data.data;
