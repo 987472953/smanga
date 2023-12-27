@@ -98,7 +98,9 @@ function transformResponseData(data: any) {
     }
 
     // 登录信息错误
-    if (data.code === 4010) {
+    if (data.code === 4010 || data.code === 4011) {
+        // 清除登录信息
+        sessionStorage.removeItem('jwtToken');
         router.push('/login');
     }
 
