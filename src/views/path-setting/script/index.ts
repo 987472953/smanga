@@ -60,7 +60,7 @@ export default defineComponent({
 				type: 'warning',
 			})
 				.then(async () => {
-					const res = await pathApi.delete_path(row.pathId);
+					const res = await pathApi.delete_path(row.id);
 
 					if (res.success) {
 						this.reload_table();
@@ -82,7 +82,7 @@ export default defineComponent({
 					const res = await pathApi.rescan_path(
 						row.mediaId,
 						row.path,
-						row.pathId
+						row.id
 					);
 
 					if (res.success) {
@@ -98,7 +98,7 @@ export default defineComponent({
 		 * @param row
 		 */
 		async scan_path(index: number, row: any) {
-			const res = await pathApi.scan_path(row.mediaId, row.path, row.pathId);
+			const res = await pathApi.scan_path(row.mediaId, row.path, row.id);
 
 			if (res.success) {
 				this.reload_table();

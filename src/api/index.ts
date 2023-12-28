@@ -26,15 +26,12 @@ const ajax = Axios.create({
     },
     transformRequest: [
         (data) => {
-            // 用户标识
-            const userId = Cookies.get('userId');
             // 获取时间戳
             const timestamp = new Date().getTime();
             // 初始化传参
             data = data || {};
             // 加入时间戳与密钥
             data = Object.assign(data, {
-                userId,
                 timestamp,
                 keyword: get_key_word(timestamp),
             });
@@ -55,7 +52,6 @@ const ajax_get = Axios.create({
     timeout: 10 * 1000,
     method: 'get',
     params: {
-        userId: Cookies.get('userId'),
         timestamp: new Date().getTime(),
         keyword: get_key_word(new Date().getTime()),
     },

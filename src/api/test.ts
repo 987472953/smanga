@@ -18,14 +18,12 @@ export const testAxios = Axios.create({
     },
     transformRequest: [
         data => {
-            // 用户标识
-            const userId = Cookies.get('userId');
             // 获取时间戳
             const timestamp = new Date().getTime();
             // 初始化传参
             data = data || {};
             // 加入时间戳与密钥
-            data = Object.assign(data, {userId, timestamp});
+            data = Object.assign(data, {timestamp});
             // 返回json
             return Qs.stringify(data);
         },

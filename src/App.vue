@@ -96,18 +96,6 @@ function set_screen_type() {
 }
 
 /**
- * 检查登录状态
- */
-async function check_login() {
-	const id = Cookies.get('userId');
-	const name = Cookies.get('userName');
-
-	if ((!name || !id) && route.name !== 'init') {
-		router.push('/login');
-	}
-}
-
-/**
  * 获取书签列表
  */
 async function set_bookmark() {
@@ -138,7 +126,7 @@ async function get_setting() {
 	if (!res.request) {
 		return false;
 	}
-	
+
 	const configValue = JSON.parse(res.request);
 
 	// 使用数据库用户设置，覆盖当前设置

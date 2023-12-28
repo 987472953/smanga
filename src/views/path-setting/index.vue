@@ -13,7 +13,7 @@
         </el-table-column>
 
         <el-table-column
-            prop="pathId"
+            prop="id"
             :label="$t('path.id')"
             width="80">
         </el-table-column>

@@ -23,7 +23,7 @@
             <div class="character" @wheel="character_wheel" v-if="character.length">
                 <p class="character-title">角色</p>
                 <perfect-scrollbar class="character-scroll" @wheel="character_wheel"
-                    :options="{ suppressScrollX: false, suppressScrollY: true }">
+                                   :options="{ suppressScrollX: false, suppressScrollY: true }">
                     <div v-for="item in character" class="character-item" :key="item.characterId">
                         <img :src="item.blob" :alt="item.characterName">
                         <div class="right">
@@ -46,7 +46,9 @@
                 <el-descriptions-item label="评分">{{ mangaInfo.star }}</el-descriptions-item>
                 <el-descriptions-item label="标签">
                     <el-tag v-for="item in tags" :key="item.tagId" class="tag" size="small" :color="item.tagColor">{{
-                        item.tagName }}</el-tag>
+                            item.tagName
+                        }}
+                    </el-tag>
                 </el-descriptions-item>
                 <el-descriptions-item label="简介">{{ mangaInfo.describe }}</el-descriptions-item>
             </el-descriptions>
@@ -65,7 +67,7 @@
         </div>
 
         <el-dialog :title="$t('rightSidebar.editTags')" v-model="editTagsDialog">
-            <mangaTagBox :mangaId="mangaInfo.mangaId" :tags="tags" @update_tags="update_tags" />
+            <mangaTagBox :mangaId="mangaInfo.mangaId" :tags="tags" @update_tags="update_tags"/>
         </el-dialog>
     </div>
 </template>
@@ -185,9 +187,9 @@ async function get_latest_reading() {
     const mangaId = mangaInfo.mangaId;
     if (!mangaId) return;
 
-  let value = await lastReadApi.get_latest(mangaId);
-  value.id  = value.chapterId;
-  latestChapterInfo.value = value;
+    let value = await lastReadApi.get_latest(mangaId);
+    value.id = value.chapterId;
+    latestChapterInfo.value = value;
 }
 
 /**
@@ -195,12 +197,10 @@ async function get_latest_reading() {
  * @return {*}
  */
 async function go_chapter() {
-  console.log('latestChapterInfo', latestChapterInfo)
     const chapterInfo = latestChapterInfo.value ? latestChapterInfo.value : firstChapterInfo.value;
 
     const res = await chapterApi.get(chapterInfo.mangaId);
     global_set_json('chapterList', res.list);
-    console.log("go_chapter", res.list)
 
     // 缓存章节信息
     global_set('chapterId', chapterInfo.id);
@@ -211,13 +211,13 @@ async function go_chapter() {
 
     let page = chapterInfo.page || 1;
 
-  console.log('chapterInfo id', chapterInfo.id)
+    console.log('chapterInfo id', chapterInfo.id)
     router.push({
         name: chapterInfo.browseType,
         query: {
             chapterId: chapterInfo.id
         },
-        params: { page },
+        params: {page},
     });
 }
 
@@ -244,7 +244,7 @@ function go_chapter_list() {
  */
 async function render_meta() {
     const route = useRoute();
-  console.log('route', route.query)
+
     const mangaId = Number(route.query.mangaId);
     const res = await mangaApi.get_manga_info(mangaId);
     let bannerSoft: metaItemType[] = [];
@@ -256,29 +256,29 @@ async function render_meta() {
     character.value = res.character;
 
     character.value.forEach(async (item: characterItem) => {
-        const blob = await imageApi.get(item.characterPicture);
-        item.blob = blob;
+        item.blob = await imageApi.get(item.characterPicture);
     })
 
-    // if (res.meta.length > 0) {
-    //     // banner图
-    //     for (let i = 0; i < res.meta.length; i++) {
-    //         const metaItem = res.meta[i];
-    //         if (metaItem.metaType === 'banner') {
-    //             metaItem.blob = await imageApi.get(metaItem.metaFile);
-    //             bannerSoft.push(metaItem);
-    //         }
-    //     }
-    // }
-    //
-    // // 漫画封面
-    // mangaCover.value = await imageApi.get(res.info.mangaCover);
-    //
-    // // 将图片进行排序
-    // bannerSoft.sort((a: any, b: any) => { return a.metaFile - b.metaFile });
-    //
-    // // 将处理好的结果赋值给ref对象 (将计算过程整合 避免多次渲染)
-    // banner.value = bannerSoft;
+
+    if (res.meta && res.meta.length > 0) {
+        // banner图
+        for (let i = 0; i < res.meta.length; i++) {
+            const metaItem = res.meta[i];
+            if (metaItem.metaType === 'banner') {
+                metaItem.blob = await imageApi.get(metaItem.metaFile);
+                bannerSoft.push(metaItem);
+            }
+        }
+    }
+    // 漫画封面
+    mangaCover.value = await imageApi.get(res.info.mangaCover);
+    console.log(mangaCover)
+    // 将图片进行排序
+    bannerSoft.sort((a: any, b: any) => {
+        return a.metaFile - b.metaFile
+    });
+    // 将处理好的结果赋值给ref对象 (将计算过程整合 避免多次渲染)
+    banner.value = bannerSoft;
 }
 
 /**
@@ -418,7 +418,7 @@ function update_tags(tagsParams: tagItemType[]) {
     flex-wrap: wrap;
     justify-content: space-between;
 
-    .el-button+.el-button {
+    .el-button + .el-button {
         margin-left: 0;
     }
 
