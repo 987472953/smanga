@@ -1,8 +1,8 @@
 import Axios, {InternalAxiosRequestConfig} from 'axios';
-import {Md5} from 'ts-md5/dist/md5';
 import {ElMessage} from 'element-plus';
 import {Cookies} from '@/utils';
 import router from '@/router';
+import {Md5} from "ts-md5";
 
 const devUrl = '';
 const prodUrl = process.env.VUE_APP_PATH || '';

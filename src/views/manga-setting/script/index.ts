@@ -74,7 +74,7 @@ export default defineComponent({
 		 * 加载表格数据
 		 */
 		async load_table(page = 1, pageSize = 10) {
-			const res = await mangaApi.get(0, page, pageSize, '', this.keyWord);
+			const res = await mangaApi.get(undefined, page, pageSize, '', this.keyWord);
 			this.count = res.total;
 			this.tableData = res.records;
 		},

@@ -17,7 +17,7 @@ const mangaApi = {
      * @return {*}
      */
     async get(
-        mediaId: number,
+        mediaId: number | undefined,
         page: number,
         pageSize: number,
         order = '',

@@ -14,7 +14,7 @@ const pathApi = {
 	 * @param page
 	 * @param pageSize
 	 */
-	async get_path(mediaId: number, page: number, pageSize: number) {
+	async get_path(mediaId: number | undefined, page: number, pageSize: number) {
 		const res = ajax_get({
 			url: 'path/get',
 			params: {mediaId, page, pageSize},

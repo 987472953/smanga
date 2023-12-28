@@ -67,7 +67,7 @@ export default defineComponent({
          * 加载表格数据
          */
         async load_table(page = 1, pageSize = 10) {
-            const res = await chapterApi.get(0, page, pageSize);
+            const res = await chapterApi.get(undefined, page, pageSize);
             this.count = Number(res.count);
             this.tableData = res.list;
         },

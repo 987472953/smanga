@@ -110,7 +110,7 @@ export default defineComponent({
 		async load_path(mediaId: any) {
 			const res = await mediaApi.get_path(mediaId);
 
-			this.pathArr = res.list;
+			this.pathArr = res.data.records;
 		},
 		/**
 		 * 加载表格数据

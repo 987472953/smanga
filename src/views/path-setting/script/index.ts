@@ -41,9 +41,10 @@ export default defineComponent({
 		 * 加载表格数据
 		 */
 		async load_table(page = 1, pageSize = 10) {
-			const res = await pathApi.get_path(0, page, pageSize);
-			this.count = Number(res.count);
-			this.tableData = res.list;
+			const res = await pathApi.get_path(undefined, page, pageSize);
+			const result = res.data;
+			this.count = Number(result.total);
+			this.tableData = result.records;
 		},
 		/**
 		 * 重载数据 页码不变

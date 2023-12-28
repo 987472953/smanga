@@ -16,7 +16,7 @@ interface chapterGetRes {
 
 const chapterApi = {
 	get: async function (
-		mangaId: number,
+		mangaId: number | undefined,
 		page: number | undefined = undefined,
 		pageSize: number | undefined = undefined,
 		order = userConfig.order,
