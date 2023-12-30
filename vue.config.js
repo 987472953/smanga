@@ -6,12 +6,12 @@ const pxtorem = require('postcss-pxtorem');
 // 开发模式请求地址
 const devUrl = process.env.VUE_APP_PROXY_HTTP_URL;
 // 生产环境请求地址
-const prodUrl = 'http://127.0.0.1';
+const prodUrl = 'http://101.201.47.237:8888';
 
 const target = process.env.NODE_ENV === 'development' ? devUrl : prodUrl;
 const wsTarget =
 	process.env.NODE_ENV === 'production'
-		? 'ws://192.168.2.10'
+		? 'ws://101.201.47.237'
 		: 'ws://127.0.0.1';
 
 // 路径
@@ -23,7 +23,7 @@ const outputDir = output_dir();
 module.exports = {
 	outputDir,
 	// 公共路径的配置 生产环境下,可能是子目录 要使用相对路径
-	publicPath: process.env.NODE_ENV === 'development' ? '/' : './',
+	publicPath: process.env.NODE_ENV === 'development' ? '/' : '/',
 
 	lintOnSave: false,
 	// 开发环境代理
@@ -34,18 +34,19 @@ module.exports = {
 		// openPage: '#/about',
 		// 不知道
 		hot: true,
-		// 端口号
-		port: 8001,
+		// // 端口号
+		// port: 8001,
 		// 主机
 		// host: '0.0.0.0',
 		proxy: {
 			//配置代理
-			'/': {
+			'/api': {
 				target: target,
 				changeOrigin: true,
 				ws: true,
+				source: false,
 				pathRewrite: {
-					'^/': '',
+					'^/api': '',
 				},
 			},
 		},

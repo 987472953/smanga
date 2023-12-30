@@ -15,7 +15,7 @@ import Qs from 'qs';
  * @type {Axios}
  */
 const img = Axios.create({
-    baseURL: url + 'image/get',
+    baseURL: url + '/image/get',
     timeout: 15 * 1000,
     method: 'post',
     responseType: 'blob', // 设置接收格式为blob格式
