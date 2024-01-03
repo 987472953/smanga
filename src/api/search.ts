@@ -33,7 +33,7 @@ const searchApi = {
 			params: {searchText, searchType, page, pageSize, order},
 		});
 
-		return (await res).data;
+		return (await res).data.data;
 	},
 };
 

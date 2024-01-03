@@ -149,7 +149,7 @@ onActivated(() => {
 });
 
 function go_browse(item: any) {
-	const chapterId = item.chapterId;
+	const chapterId = item.id;
 	const chapterName = item.chapterName;
 	const chapterPath = item.chapterPath;
 	const chapterType = item.chapterType;
