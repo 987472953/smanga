@@ -60,25 +60,26 @@ export default defineComponent({
 
 	// 方法
 	methods: {
-		async do_login() {
-			const res = await userApi.login(this.form);
-			if (res.success) {
-				// 缓存用户信息
-				const resInfo = res.data.userInfo;
-				Object.assign(userInfo, resInfo);
-        // Cookies.set('userName', resInfo.username);
-				// Cookies.set('userId', resInfo.userId);
-				// Cookies.set('editMedia', resInfo.editMedia);
-				// Cookies.set('editUser', resInfo.editUser);
-				// power.editMedia = resInfo.editMedia == 1;
-				// power.editUser = resInfo.editUser == 1;
-        let token = res.data.token;
-        sessionStorage.setItem('jwtToken', token);
-        console.log("session jwt: " + sessionStorage.getItem('jwtToken'));
-				await this.$router.push('media-list');
-			}
-		},
-	},
+        async do_login() {
+            const res = await userApi.login(this.form);
+            if (res.success) {
+                // 缓存用户信息
+                const resInfo = res.data.userInfo;
+                Object.assign(userInfo, resInfo);
+                // Cookies.set('userName', resInfo.username);
+                // Cookies.set('userId', resInfo.userId);
+                // Cookies.set('editMedia', resInfo.editMedia);
+                // Cookies.set('editUser', resInfo.editUser);
+                // power.editMedia = resInfo.editMedia == 1;
+                // power.editUser = resInfo.editUser == 1;
+                let token = res.data.token;
+                sessionStorage.setItem('jwtToken', token);
+                Cookies.set('jwtToken', token);
+                console.log("session jwt: " + sessionStorage.getItem('jwtToken'));
+                await this.$router.push('media-list');
+            }
+        },
+    },
 
 	// 生命周期
 	created() {

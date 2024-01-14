@@ -111,3 +111,7 @@ export function get_cookie(key: string) {
     const arr = document.cookie.match(new RegExp("\\b" + key + "=([^;]+)(;|$)"));
     return arr ? arr[1] : '';
 }
+
+export function remove_cookie(key: string) {
+    document.cookie = key + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+}

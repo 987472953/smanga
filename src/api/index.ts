@@ -97,6 +97,7 @@ function transformResponseData(data: any) {
     if (data.code === 4010 || data.code === 4011) {
         // 清除登录信息
         sessionStorage.removeItem('jwtToken');
+        Cookies.remove("jwtToken")
         router.push('/login');
     }
 
@@ -104,15 +105,30 @@ function transformResponseData(data: any) {
 }
 
 function addJwtTokenToRequest(config: InternalAxiosRequestConfig) {
-    // 从 Session Storage 中获取 JWT Token
-    const jwtToken = sessionStorage.getItem('jwtToken');
+    const jwtToken = getSessionStorageToken() || getCookieToken();
 
-    // 如果 JWT Token 存在，将其添加到请求头
-    if (jwtToken && jwtToken !== 'undefined') {
+    if (jwtToken) {
         config.headers.Authorization = `Bearer ${jwtToken}`;
     }
 
     return config;
+}
+
+function getSessionStorageToken() {
+    const jwtToken = sessionStorage.getItem('jwtToken');
+    if (jwtToken && jwtToken !== 'undefined') {
+        return jwtToken;
+    }
+    return null;
+}
+
+function getCookieToken() {
+    const jwtTokenFromCookie = Cookies.get('jwtToken');
+    if (jwtTokenFromCookie && jwtTokenFromCookie !== 'undefined') {
+        sessionStorage.setItem('jwtToken', jwtTokenFromCookie);
+        return jwtTokenFromCookie;
+    }
+    return null;
 }
 
 /**
