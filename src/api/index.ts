@@ -4,8 +4,9 @@ import {Cookies} from '@/utils';
 import router from '@/router';
 import {Md5} from "ts-md5";
 
-const devUrl = '';
-const prodUrl = process.env.VUE_APP_PATH || '';
+const devUrl = 'api';
+// const prodUrl = process.env.VUE_APP_PATH || '';
+const prodUrl = 'api';
 
 // 接口路径的设置
 const url = process.env.NODE_ENV === 'development' ? '' + devUrl : prodUrl;
