@@ -21,7 +21,7 @@ const img = Axios.create({
     responseType: 'blob', // 设置接收格式为blob格式
     params: {},
     headers: {
-        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+        'Content-Type': 'application/json',
     },
     transformRequest: [
         (data) => {
@@ -34,7 +34,7 @@ const img = Axios.create({
                 timestamp,
             });
             // 返回json
-            return Qs.stringify(data);
+            return JSON.stringify(data);
         },
     ],
     transformResponse: [
