@@ -35,7 +35,7 @@ module.exports = {
 		// 不知道
 		hot: true,
 		// // 端口号
-		// port: 8001,
+		port: 8001,
 		// 主机
 		// host: '0.0.0.0',
 		proxy: {
