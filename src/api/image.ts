@@ -61,9 +61,14 @@ const imageApi = {
     async get(file: string) {
         const [res, err] = await img({data: {file}}).then(res => [res, null]).catch(err => [null, err]);
 
-        if (res) return res.data;
+
+        if (res) {
+            return res.data;
+        }
         // 有错误 则再次且仅一次请求
-        if (err) return (await img({data: {file}})).data;
+        if (err) {
+            return (await img({data: {file}})).data;
+        }
     },
 
     async chapter_img(

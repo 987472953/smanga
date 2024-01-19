@@ -225,7 +225,6 @@ async function reload_page(addHistory = true, clearPage = true, pageParams = 1) 
 		// 更新阅读记录
 		lastReadApi.add(currentPage.value, chapterInfo.id, chapterInfo.mangaId);
 	}
-  console.log("sfsgs", chapterInfo)
 
 	// 重置图片数据
 	if (clearPage) {
