@@ -8,33 +8,33 @@
 import {ajax, ajax_get} from './index';
 
 export function search(
-	searchText: string,
-	searchType: string,
-	page: number,
-	pageSize: number,
-	order = ''
+    searchText: string,
+    searchType: string,
+    page: number,
+    pageSize: number,
+    order = ''
 ) {
-	return ajax_get({
-		url: 'search/get',
-		params: {searchText, searchType, page, pageSize, order},
-	});
+    return ajax_get({
+        url: 'search' + searchType + '/get',
+        params: {searchText, searchType, page, pageSize, order},
+    });
 }
 
 const searchApi = {
-	async get(
-		searchText: string,
-		searchType: string,
-		page: number,
-		pageSize: number,
-		order = ''
-	) {
-		const res =  ajax_get({
-			url: 'search/get',
-			params: {searchText, searchType, page, pageSize, order},
-		});
+    async get(
+        searchText: string,
+        searchType: string,
+        page: number,
+        pageSize: number,
+        order = ''
+    ) {
+        const res = ajax_get({
+            url: 'search/' + searchType + '/get',
+            params: {searchText, searchType, page, pageSize, order},
+        });
 
-		return (await res).data.data;
-	},
+        return (await res).data.data;
+    },
 };
 
 export default searchApi;

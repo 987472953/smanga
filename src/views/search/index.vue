@@ -253,34 +253,34 @@ function context_menu(mangaInfo: any, key: number) {
 
 // 章节方法
 async function go_browse(item: any) {
-	const chapterId = item.chapterId;
-	const chapterName = item.chapterName;
-	const chapterPath = item.chapterPath;
-	const chapterType = item.chapterType;
-	const chapterCover = item.chapterCover;
-	const browseType = item.browseType;
+    const chapterId = item.id;
+    const chapterName = item.chapterName;
+    const chapterPath = item.chapterPath;
+    const chapterType = item.chapterType;
+    const chapterCover = item.chapterCover;
+    const browseType = item.browseType;
 
-	// 缓存章节信息
-	global_set('chapterId', chapterId);
-	global_set('chapterName', chapterName);
-	global_set('chapterPath', chapterPath);
-	global_set('chapterType', chapterType);
-	global_set('chapterCover', chapterCover);
+    // 缓存章节信息
+    global_set('chapterId', chapterId);
+    global_set('chapterName', chapterName);
+    global_set('chapterPath', chapterPath);
+    global_set('chapterType', chapterType);
+    global_set('chapterCover', chapterCover);
 
-	// 加载章节列表
-	const res = await chapterApi.get(item.mangaId);
-	global_set_json('chapterList', res.list);
-  console.log(res.list)
+    // 加载章节列表
+    const res = await chapterApi.get(item.mangaId);
+    global_set_json('chapterList', res.list);
+    console.log(res.list)
 
-	let page = 1;
+    let page = 1;
 
-	router.push({
-		name: browseType,
-		query: {
-			chapterId,
-		},
-		params: { page },
-	});
+    router.push({
+        name: browseType,
+        query: {
+            chapterId,
+        },
+        params: {page},
+    });
 }
 </script>
 
