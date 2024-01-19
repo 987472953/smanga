@@ -128,7 +128,7 @@ const searchText = ref('');
 const searchType = ref('manga');
 
 // 排序方式
-const sortOrder = ['id', 'idDesc', 'name', 'nameDesc', 'time', 'timeDesc'];
+const sortOrder = ['id', 'idDesc', 'mangaName', 'mangaNameDesc', 'createTime', 'createTimeDesc'];
 
 // 视图类型
 const viewClass = computed(() => {

@@ -90,7 +90,7 @@ export const userConfig = reactive({
 	// 主题皮肤
 	theme: 'grey',
 	// 默认排序规则
-	order: 'name',
+	order: 'createTimeDesc',
 	// 翻页按钮调转
 	pageTurningReverse: false,
 	// 阅读操作面板 顶部与底部尺寸

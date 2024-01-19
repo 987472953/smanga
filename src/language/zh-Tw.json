@@ -294,10 +294,10 @@
   "sortOrder": {
     "id": "id",
     "idDesc": "id-倒序",
-    "name": "名稱",
-    "nameDesc": "名稱-倒序",
-    "time": "入庫時間",
-    "timeDesc": "入庫時間-倒序"
+    "mangaName": "名稱",
+    "mangaNameDesc": "名稱-倒序",
+    "createTime": "入庫時間",
+    "createTimeDesc": "入庫時間-倒序"
   },
   "history": {
     "confirm": {
