@@ -253,7 +253,7 @@ function context_menu(mangaInfo: any, key: number) {
 
 // 章节方法
 async function go_browse(item: any) {
-    const chapterId = item.id;
+    const chapterId = item.id
     const chapterName = item.chapterName;
     const chapterPath = item.chapterPath;
     const chapterType = item.chapterType;

@@ -104,7 +104,7 @@ async function bookmark() {
 	} else {
 		// 区分单双页
 		let page = Number(global_get('page'));
-		
+
 		if (route.name === 'double') {
 			page = page * 2 - 1;
 		}
@@ -117,7 +117,7 @@ async function bookmark() {
 	}
 	const res = await bookmarkApi.get_bookmark();
 
-	global_set_json('bookmarkList', res.list);
+	global_set_json('bookmarkList', res.records);
 }
 </script>
 

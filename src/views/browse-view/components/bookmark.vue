@@ -45,9 +45,9 @@ let show = computed(() => {
 		if (chapterId != item.chapterId) {
 			continue;
 		}
-		
+
 		if (item.page == page) {
-			cache.bookmarkId = item.bookmarkId;
+			cache.bookmarkId = item.id;
 			config.bookmarkShow = true;
 			return true;
 		}

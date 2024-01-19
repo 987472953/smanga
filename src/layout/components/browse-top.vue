@@ -78,7 +78,7 @@ async function handleSelect(key: string) {
 			await bookmarkApi.delete_and_update(cache.bookmarkId);
 			return;
 		}
-		
+
 		let page = global_get('page');
 
 		if (route.name === 'double') {
@@ -93,7 +93,7 @@ async function handleSelect(key: string) {
 
 		const res = await bookmarkApi.get_bookmark();
 
-		global_set_json('bookmarkList', res.list);
+		global_set_json('bookmarkList', res.records);
 
 		return;
 	}

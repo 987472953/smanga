@@ -100,7 +100,7 @@ function set_screen_type() {
  */
 async function set_bookmark() {
 	const res = await bookmarkApi.get_bookmark();
-	global_set_json('bookmarkList', res.list);
+	global_set_json('bookmarkList', res.records);
 }
 
 async function get_setting() {

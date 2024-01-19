@@ -91,7 +91,7 @@ async function bookmark() {
   }
   const res = await bookmarkApi.get_bookmark();
 
-  global_set_json('bookmarkList', res.list);
+  global_set_json('bookmarkList', res.records);
 }
 </script>
 

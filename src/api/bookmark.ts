@@ -58,7 +58,7 @@ const bookmarkApi = {
 			params: {page, pageSize},
 		});
 
-		return (await res).data;
+		return (await res).data.data;
 	},
 
 	/**
@@ -86,7 +86,7 @@ const bookmarkApi = {
 		});
 
 		const res1 = await this.get_bookmark();
-		global_set_json('bookmarkList', res1.list);
+		global_set_json('bookmarkList', res1.records);
 
 		return res.data;
 	},

@@ -215,8 +215,6 @@ async function load_image(index: number, errNum = 0, unshift = false) {
  */
 async function reload_page(addHistory = true, clearPage = true, pageParams = 1) {
 	// 初始化chapterInfo
-  console.log(chapterInfo)
-  console.log(chapterInfo.id)
 	if (!chapterInfo.id) {
 		const chapterId = Number(route.query.chapterId);
 

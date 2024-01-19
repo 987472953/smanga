@@ -97,10 +97,10 @@ export default defineComponent({
      */
     async load_table(page = 1, pageSize = 10) {
       const res = await bookmarkApi.get_bookmark(page, pageSize);
-      this.tableData = res.list;
-      this.count = Number(res.count);
+      this.tableData = res.records;
+      this.count = Number(res.total);
     },
-    
+
     /**
      * 重载数据 页码不变
      */
