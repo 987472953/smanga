@@ -294,8 +294,8 @@
   "sortOrder": {
     "id": "id",
     "idDesc": "id-倒序",
-    "mangaName": "name",
-    "mangaNameDesc": "name-desc",
+    "name": "name",
+    "nameDesc": "name-desc",
     "createTime": "time",
     "createTimeDesc": "time-desc"
   },
