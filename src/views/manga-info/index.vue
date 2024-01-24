@@ -296,7 +296,7 @@ function character_wheel(event: Event) {
 
 async function get_collect_status() {
     if (!mangaInfo.mangaId) return;
-    isCollect.value = (await collectApi.is_collect('manga', mangaInfo.mangaId)).request;
+    isCollect.value = (await collectApi.is_collect('manga', mangaInfo.mangaId)).data;
 }
 
 async function collect_manga() {

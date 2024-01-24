@@ -60,7 +60,7 @@ const collectApi = {
 	 */
 	async is_collect(collectType: string, targetId: number) {
 		const res = ajax({
-			url: 'collect/is-collect',
+			url: 'collect/isCollect',
 			data: {collectType, targetId},
 		});
 
