@@ -225,8 +225,8 @@ async function page_change(
 		pageSize,
 		userConfig.order
 	);
-	list.value = res.data.list;
-	count.value = res.data.count;
+	list.value = res.data.data.records;
+	count.value = res.data.data.total;
 
 	// 结束加载
 	loading.value = false;
